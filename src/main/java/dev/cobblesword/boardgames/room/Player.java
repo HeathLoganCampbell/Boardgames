@@ -19,7 +19,7 @@ public class Player
 
     public void setRoom(String roomId)
     {
-        userSession.enterRoom(this.username, roomId);
+        userSession.enterRoom(roomId, this.username);
     }
 
     public void sendMessage(String message)

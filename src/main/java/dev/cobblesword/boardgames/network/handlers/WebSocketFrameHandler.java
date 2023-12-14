@@ -46,8 +46,6 @@ public class WebSocketFrameHandler extends SimpleChannelInboundHandler<WebSocket
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         ChannelId channelId = ctx.channel().id();
 
-        UserSession userSession = activeUsers.get(channelId);
-        System.out.println(userSession.getUsername() + " has left");
         activeUsers.remove(channelId);
 
         super.channelInactive(ctx);

@@ -82,14 +82,14 @@ ws.onopen = function(event) {
     console.log("Connected to the WebSocket server");
 
     // Send a message to the server
-    var joinMatchPacket = {
-        type: 'joinMatch',
-        data: {
-            gameId: "12345",
-            username: "player1"
-        }
-    };
-    ws.send(JSON.stringify(joinMatchPacket));
+    // var joinMatchPacket = {
+    //     type: 'joinMatch',
+    //     data: {
+    //         gameId: "12345",
+    //         username: "player1"
+    //     }
+    // };
+    // ws.send(JSON.stringify(joinMatchPacket));
 };
 
 // Listen for messages
@@ -108,12 +108,20 @@ ws.onclose = function(event) {
 };
 
 
-setInterval(() => {
-    ws.send(JSON.stringify({ type: "keepAlive", data: {} }));
-}, 10_000);
+// setInterval(() => {
+//     ws.send(JSON.stringify({ type: "keepAlive", data: {} }));
+// }, 10_000);
+
+function createRoom(username) {
+    ws.send(JSON.stringify({ type: "ROOM-CREATE_ROOM", data: { username: username } }));
+}
+
+function joinRoom(roomId, username) {
+    ws.send(JSON.stringify({ type: "ROOM-JOIN_ROOM", data: { roomId: roomId, username: username} }));
+}
 
 function launchMissile(x, y) {
-    ws.send(JSON.stringify({ type: "LaunchMissilePacket", x: x, y: y }));
+    ws.send(JSON.stringify({ type: "LaunchMissilePacket", data: {} }));
 }
 
 function createMatch() {

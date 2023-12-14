@@ -21,6 +21,8 @@ public class GameRoom
     {
         this.players.add(player);
         player.setRoom(roomId);
+
+        System.out.println("Room] " + player.getUsername() + " joined room " + roomId);
     }
 
     public void broadcastMessage(String message)

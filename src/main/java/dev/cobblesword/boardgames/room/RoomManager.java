@@ -32,6 +32,8 @@ public class RoomManager
         gameRoom.setRoomId(roomId);
         rooms.put(roomId, gameRoom);
 
+        System.out.println("Room] Created room " + roomId);
+
         return gameRoom;
     }
 
