@@ -1,7 +1,7 @@
-package dev.cobblesword.battleships;
+package dev.cobblesword.boardgames;
 
-import dev.cobblesword.battleships.game.BattleshipMatch;
-import dev.cobblesword.battleships.network.handlers.WebSocketFrameHandler;
+import dev.cobblesword.boardgames.network.handlers.WebSocketFrameHandler;
+import dev.cobblesword.boardgames.room.RoomManager;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -24,7 +24,7 @@ public class Main {
 //        battleshipMatch.launchMissile(7, 5);
 //        battleshipMatch.launchMissile(9, 5);
 //        battleshipMatch.draw();
-
+        RoomManager roomManager = new RoomManager();
 
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -38,7 +38,7 @@ public class Main {
                             ChannelPipeline pipeline = ch.pipeline();
                             pipeline.addLast(new HttpServerCodec());
                             pipeline.addLast(new WebSocketServerProtocolHandler("/websocket"));
-                            pipeline.addLast(new WebSocketFrameHandler());
+                            pipeline.addLast(new WebSocketFrameHandler(roomManager));
                         }
                     });
 
